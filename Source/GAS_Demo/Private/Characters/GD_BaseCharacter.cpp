@@ -3,6 +3,8 @@
 
 #include "GAS_Demo/Public/Characters/GD_BaseCharacter.h"
 
+#include "AbilitySystemComponent.h"
+
 
 AGD_BaseCharacter::AGD_BaseCharacter()
 {
@@ -15,5 +17,16 @@ AGD_BaseCharacter::AGD_BaseCharacter()
 UAbilitySystemComponent* AGD_BaseCharacter::GetAbilitySystemComponent() const
 {
 	return nullptr;
+}
+
+void AGD_BaseCharacter::GiveStartupAbilities()
+{
+	if (!IsValid(GetAbilitySystemComponent())) return;
+	
+	for (const auto& Ability: StartupAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
+		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
+	}
 }
 
