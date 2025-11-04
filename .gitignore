@@ -1,0 +1,54 @@
+# Unreal Engine + Rider .gitignore
+
+# Ignore engine-generated folders
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+Script/
+Shaders/
+
+# Rider / VS cache
+.vs/
+.vscode/
+.idea/
+
+# User-specific project files
+*.sln
+*.suo
+*.user
+*.userprefs
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+*.VC.db-shm
+*.VC.db-wal
+
+# Logs, backups and autosaves
+*.log
+*.bak
+*_Backup*/
+Saved/Autosaves/
+Saved/Backup/
+
+# Temporary or generated source
+*.generated.*
+*.tmp
+*.temp
+
+# Ignore platform-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore local editor config
+Config/DefaultEditorPerProjectUserSettings.ini
+Config/DefaultEditorUserSettings.ini
+
+# Optional packaged builds
+WindowsNoEditor/
+LinuxNoEditor/
+Android_ASTC/
+Android_ETC2/
+Android_DXT/
