@@ -33,6 +33,8 @@ void AGD_PlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	
 	EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Started, this, &ThisClass::Primary);
+	EnhancedInputComponent->BindAction(SecondaryAction, ETriggerEvent::Started, this, &ThisClass::Secondary);
+	EnhancedInputComponent->BindAction(TertiaryAction, ETriggerEvent::Started, this, &ThisClass::Tertiary);
 }
 
 void AGD_PlayerController::Jump()
@@ -76,6 +78,16 @@ void AGD_PlayerController::Primary()
 {
 	//UE_LOG(LogTemp,Warning,TEXT("AGD_PlayerController::Primary"));
 	ActivateAbility(GDTags::GDAbilities::Primary);
+}
+
+void AGD_PlayerController::Secondary()
+{
+	ActivateAbility(GDTags::GDAbilities::Secondary);
+}
+
+void AGD_PlayerController::Tertiary()
+{
+	ActivateAbility(GDTags::GDAbilities::Tertiary);
 }
 
 void AGD_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
