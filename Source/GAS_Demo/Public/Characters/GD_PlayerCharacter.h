@@ -17,6 +17,9 @@ class GAS_DEMO_API AGD_PlayerCharacter : public AGD_BaseCharacter
 public:
 
 	AGD_PlayerCharacter();
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 
 private:
 

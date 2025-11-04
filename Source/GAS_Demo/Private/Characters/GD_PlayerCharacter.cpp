@@ -2,10 +2,13 @@
 
 
 #include "GAS_Demo/Public/Characters/GD_PlayerCharacter.h"
+
+#include "AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Player/GD_PlayerState.h"
 
 
 // Sets default values
@@ -37,6 +40,33 @@ AGD_PlayerCharacter::AGD_PlayerCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
+}
+
+UAbilitySystemComponent* AGD_PlayerCharacter::GetAbilitySystemComponent() const
+{
+	AGD_PlayerState* GDPlayerState = Cast<AGD_PlayerState>(GetPlayerState());
+	if (!IsValid(GDPlayerState)) return nullptr;
+
+	return GDPlayerState->GetAbilitySystemComponent();
+}
+
+void AGD_PlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (!IsValid(GetAbilitySystemComponent())) return;
+
+	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(),this);
+	
+}
+
+void AGD_PlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	if (!IsValid(GetAbilitySystemComponent())) return;
+
+	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(),this);
 }
 
 

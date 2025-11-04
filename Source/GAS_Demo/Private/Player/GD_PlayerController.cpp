@@ -27,6 +27,8 @@ void AGD_PlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ThisClass::StopJumping);
 	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::Look);
 	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Move);
+	
+	EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Started, this, &ThisClass::Primary);
 }
 
 void AGD_PlayerController::Jump()
@@ -64,4 +66,9 @@ void AGD_PlayerController::Look(const FInputActionValue& Value)
 
 	AddYawInput(LookAxisVector.X);
 	AddPitchInput(LookAxisVector.Y);
+}
+
+void AGD_PlayerController::Primary()
+{
+	UE_LOG(LogTemp,Warning,TEXT("AGD_PlayerController::Primary"));
 }
