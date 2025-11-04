@@ -9,6 +9,8 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+struct FGameplayTag;
+
 
 UCLASS()
 class GAS_DEMO_API AGD_PlayerController : public APlayerController
@@ -39,4 +41,5 @@ private:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void Primary();
+	void ActivateAbility(const FGameplayTag& AbilityTag) const;
 };

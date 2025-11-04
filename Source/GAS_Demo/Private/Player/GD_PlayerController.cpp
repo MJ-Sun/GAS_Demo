@@ -3,9 +3,13 @@
 
 #include "GAS_Demo/Public/Player/GD_PlayerController.h"
 #include "GAS_Demo/Public/Player/GD_PlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "GameFramework/Character.h"
+#include "GameplayTags/GDTags.h"
 
 void AGD_PlayerController::SetupInputComponent()
 {
@@ -70,5 +74,14 @@ void AGD_PlayerController::Look(const FInputActionValue& Value)
 
 void AGD_PlayerController::Primary()
 {
-	UE_LOG(LogTemp,Warning,TEXT("AGD_PlayerController::Primary"));
+	//UE_LOG(LogTemp,Warning,TEXT("AGD_PlayerController::Primary"));
+	ActivateAbility(GDTags::GDAbilities::Primary);
+}
+
+void AGD_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
+{
+	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
+	if (!IsValid(ASC)) return;
+
+	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());
 }
