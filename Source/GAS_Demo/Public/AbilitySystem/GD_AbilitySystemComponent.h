@@ -13,10 +13,9 @@ class GAS_DEMO_API UGD_AbilitySystemComponent : public UAbilitySystemComponent
 	GENERATED_BODY()
 
 public:
-	UGD_AbilitySystemComponent();
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-		                           FActorComponentTickFunction* ThisTickFunction) override;
-protected:
-	virtual void BeginPlay() override;
-	
+	virtual void OnGiveAbility(FGameplayAbilitySpec& AbilitySpec) override;
+	virtual void OnRep_ActivateAbilities() override;
+
+private:
+	void HandleAutoActivateAbility(const FGameplayAbilitySpec& AbilitySpec);
 };

@@ -7,5 +7,6 @@ namespace GDTags
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Primary, "GDTags.GDAbilities.Primary", "Tag for the Primary Ability")
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Secondary, "GDTags.GDAbilities.Secondary", "Tag for the Secondary Ability")
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Tertiary, "GDTags.GDAbilities.Tertiary", "Tag for the Tertiary Ability")
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(ActivateOnGiven, "GDTags.GDAbilities.ActivateOnGiven", "Tag for the Abilities that should activate immediately once given")
 	}
 }
