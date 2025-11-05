@@ -9,4 +9,12 @@ namespace GDTags
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Tertiary, "GDTags.GDAbilities.Tertiary", "Tag for the Tertiary Ability")
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(ActivateOnGiven, "GDTags.GDAbilities.ActivateOnGiven", "Tag for the Abilities that should activate immediately once given")
 	}
+
+	namespace Events
+	{
+		namespace Enemy
+		{
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "GDTags.Events.Enemy.HitReact", "Tag for the Enemy HitReact Event");
+		}
+	}
 }
