@@ -3,7 +3,7 @@
 
 #include "Characters/GD_EnemyCharacter.h"
 
-#include "AbilitySystemComponent.h"
+#include "AbilitySystem/GD_AbilitySystemComponent.h"
 
 
 AGD_EnemyCharacter::AGD_EnemyCharacter()
@@ -11,7 +11,7 @@ AGD_EnemyCharacter::AGD_EnemyCharacter()
 	
 	PrimaryActorTick.bCanEverTick = false;
 
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UGD_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 }
