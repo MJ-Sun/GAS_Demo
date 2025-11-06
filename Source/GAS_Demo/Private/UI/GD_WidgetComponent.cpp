@@ -3,6 +3,10 @@
 
 #include "UI/GD_WidgetComponent.h"
 
+#include "AbilitySystem/GD_AbilitySystemComponent.h"
+#include "AbilitySystem/GD_AttributeSet.h"
+#include "Characters/GD_BaseCharacter.h"
+
 void UGD_WidgetComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -12,7 +16,10 @@ void UGD_WidgetComponent::BeginPlay()
 	if (!IsASCInitialized())
 	{
 		GasCharacter->OnASCInitialized.AddDynamic(this, &ThisClass::OnASCInitialized);
+		return;
 	}
+
+	InitializeAttributesDelegate();
 }
 
 void UGD_WidgetComponent::InitAbilitySystemData()
@@ -27,9 +34,28 @@ bool UGD_WidgetComponent::IsASCInitialized() const
 	return AbilitySystemComponent.IsValid() && AttributeSet.IsValid();
 }
 
+void UGD_WidgetComponent::InitializeAttributesDelegate()
+{
+	if (!AttributeSet->bAttributesInitialized)
+	{
+		AttributeSet->OnAttributeInitialized.AddDynamic(this, &ThisClass::BindToAttributeChanges);
+	}
+	else
+	{
+		BindToAttributeChanges();
+	}
+}
+
 void UGD_WidgetComponent::OnASCInitialized(UAbilitySystemComponent* ASC, UAttributeSet* AS)
 {
 	AbilitySystemComponent = Cast<UGD_AbilitySystemComponent>(ASC);
 	AttributeSet = Cast<UGD_AttributeSet>(AS);
+
+	if (!IsASCInitialized()) return;
+	InitializeAttributesDelegate();
+}
+
+void UGD_WidgetComponent::BindToAttributeChanges()
+{
 }
 

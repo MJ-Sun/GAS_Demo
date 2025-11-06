@@ -3,9 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/GD_AbilitySystemComponent.h"
-#include "AbilitySystem/GD_AttributeSet.h"
-#include "Characters/GD_BaseCharacter.h"
 #include "Components/WidgetComponent.h"
 #include "GD_WidgetComponent.generated.h"
 
@@ -34,7 +31,11 @@ private:
 
 	void InitAbilitySystemData();
 	bool IsASCInitialized() const;
+	void InitializeAttributesDelegate();
 
 	UFUNCTION()
 	void OnASCInitialized(UAbilitySystemComponent* ASC, UAttributeSet* AS);
+
+	UFUNCTION()
+	void BindToAttributeChanges();
 };
