@@ -24,6 +24,11 @@ UAbilitySystemComponent* AGD_EnemyCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UAttributeSet* AGD_EnemyCharacter::GetAttributeSet() const
+{
+	return AttributeSet;
+}
+
 void AGD_EnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();

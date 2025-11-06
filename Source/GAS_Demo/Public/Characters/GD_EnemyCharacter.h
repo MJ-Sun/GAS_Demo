@@ -17,6 +17,7 @@ class GAS_DEMO_API AGD_EnemyCharacter : public AGD_BaseCharacter
 public:
 	AGD_EnemyCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAttributeSet* GetAttributeSet() const override;
 
 protected:
 	virtual void BeginPlay() override;
