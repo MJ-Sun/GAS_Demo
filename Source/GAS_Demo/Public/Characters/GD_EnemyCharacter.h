@@ -7,6 +7,7 @@
 #include "GD_EnemyCharacter.generated.h"
 
 class UAbilitySystemComponent;
+class UAttributeSet;
 
 UCLASS()
 class GAS_DEMO_API AGD_EnemyCharacter : public AGD_BaseCharacter
@@ -23,4 +24,7 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere)	
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 };
