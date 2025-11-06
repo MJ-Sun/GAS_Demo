@@ -58,6 +58,7 @@ void AGD_PlayerCharacter::PossessedBy(AController* NewController)
 
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(),this);
 	GiveStartupAbilities();
+	InitializeAttributes();
 }
 
 void AGD_PlayerCharacter::OnRep_PlayerState()

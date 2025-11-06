@@ -35,5 +35,6 @@ void AGD_EnemyCharacter::BeginPlay()
 	if (!HasAuthority()) return;
 
 	GiveStartupAbilities();
+	InitializeAttributes();
 }
 
