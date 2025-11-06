@@ -5,7 +5,9 @@
 
 #include "AbilitySystem/GD_AbilitySystemComponent.h"
 #include "AbilitySystem/GD_AttributeSet.h"
+#include "Blueprint/WidgetTree.h"
 #include "Characters/GD_BaseCharacter.h"
+#include "UI/GD_AttributeWidget.h"
 
 void UGD_WidgetComponent::BeginPlay()
 {
@@ -57,5 +59,27 @@ void UGD_WidgetComponent::OnASCInitialized(UAbilitySystemComponent* ASC, UAttrib
 
 void UGD_WidgetComponent::BindToAttributeChanges()
 {
+	for (const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair : AttributeMap)
+	{
+		BindWidgetToAttributeChanges(GetUserWidgetObject(), Pair); // for checking the owned widget object.
+
+		GetUserWidgetObject()->WidgetTree->ForEachWidget([this, &Pair](UWidget* ChildWidget)
+		{
+			BindWidgetToAttributeChanges(ChildWidget, Pair);
+		});
+	}
 }
 
+void UGD_WidgetComponent::BindWidgetToAttributeChanges(UWidget* WidgetObject, const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair) const
+{
+	UGD_AttributeWidget* AttributeWidget = Cast<UGD_AttributeWidget>(WidgetObject);
+	if (!IsValid(AttributeWidget)) return; // We only care about GD Attribute Widgets
+	if (!AttributeWidget->MatchesAttributes(Pair)) return; // Only subscribe foe matching Attributes
+
+	AttributeWidget->OnAttributeChange(Pair, AttributeSet.Get()); // for initial values.
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Pair.Key).AddLambda([this, AttributeWidget, &Pair](const FOnAttributeChangeData& AttributeChangeData)
+	{
+		AttributeWidget->OnAttributeChange(Pair, AttributeSet.Get()); // For changes during the game
+	});
+}
