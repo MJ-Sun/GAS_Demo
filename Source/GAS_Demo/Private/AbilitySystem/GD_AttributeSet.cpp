@@ -23,7 +23,7 @@ void UGD_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	if (!bAttributesInitialized)
 	{
 		bAttributesInitialized = true;
-		OnAttributeInitialized.Broadcast();
+		OnAttributesInitialized.Broadcast();
 	}
 }
 
@@ -31,7 +31,7 @@ void UGD_AttributeSet::OnRep_AttributesInitialized()
 {
 	if (bAttributesInitialized)
 	{
-		OnAttributeInitialized.Broadcast();
+		OnAttributesInitialized.Broadcast();
 	}
 }
 

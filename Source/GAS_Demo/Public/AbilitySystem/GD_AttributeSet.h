@@ -25,7 +25,7 @@ public:
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
 	UPROPERTY(BlueprintAssignable)
-	FAttributesInitialized OnAttributeInitialized;
+	FAttributesInitialized OnAttributesInitialized;
 
 	UPROPERTY(ReplicatedUsing = OnRep_AttributesInitialized)
 	bool bAttributesInitialized = false;

@@ -2,7 +2,6 @@
 
 
 #include "GAS_Demo/Public/Characters/GD_BaseCharacter.h"
-
 #include "AbilitySystemComponent.h"
 
 
@@ -23,7 +22,7 @@ void AGD_BaseCharacter::GiveStartupAbilities()
 {
 	if (!IsValid(GetAbilitySystemComponent())) return;
 	
-	for (const auto& Ability: StartupAbilities)
+	for (const auto& Ability : StartupAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
 		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
@@ -32,7 +31,7 @@ void AGD_BaseCharacter::GiveStartupAbilities()
 
 void AGD_BaseCharacter::InitializeAttributes() const
 {
-	checkf(IsValid(InitializeAttributesEffect), TEXT("InitializeAttributes not set."));
+	checkf(IsValid(InitializeAttributesEffect), TEXT("InitializeAttributesEffect not set."));
 
 	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
 	FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(InitializeAttributesEffect, 1.f, ContextHandle);

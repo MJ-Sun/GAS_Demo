@@ -21,18 +21,18 @@ class GAS_DEMO_API AGD_BaseCharacter : public ACharacter, public IAbilitySystemI
 public:
 	AGD_BaseCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	virtual UAttributeSet* GetAttributeSet() const {return nullptr;};
+	virtual UAttributeSet* GetAttributeSet() const { return nullptr; }
 
 	UPROPERTY(BlueprintAssignable)
 	FASCInitialized OnASCInitialized;
-
 protected:
 	void GiveStartupAbilities();
 	void InitializeAttributes() const;
-private:	
-	UPROPERTY(EditAnywhere, Category = "Gas|Abilities")
+private:
+
+	UPROPERTY(EditDefaultsOnly, Category = "Crash|Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
-	UPROPERTY(EditAnywhere, Category = "Gas|Effects")
+	UPROPERTY(EditDefaultsOnly, Category = "Crash|Effects")
 	TSubclassOf<UGameplayEffect> InitializeAttributesEffect;
 };

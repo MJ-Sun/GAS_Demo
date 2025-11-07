@@ -15,7 +15,6 @@ class GAS_DEMO_API AGD_PlayerCharacter : public AGD_BaseCharacter
 	GENERATED_BODY()
 
 public:
-
 	AGD_PlayerCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const override;
@@ -24,9 +23,9 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnyWhere, Category = "Camera")
+	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	TObjectPtr<USpringArmComponent> CameraBoom;
 
-	UPROPERTY(VisibleAnyWhere, Category = "Camera")
+	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	TObjectPtr<UCameraComponent> FollowCamera;
 };

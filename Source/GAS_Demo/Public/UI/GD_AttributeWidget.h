@@ -18,10 +18,10 @@ class GAS_DEMO_API UGD_AttributeWidget : public UUserWidget
 
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS|Attributes")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gas|Attributes")
 	FGameplayAttribute Attribute;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS|Attributes")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Gas|Attributes")
 	FGameplayAttribute MaxAttribute;
 
 	void OnAttributeChange(const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair, UGD_AttributeSet* AttributeSet);
