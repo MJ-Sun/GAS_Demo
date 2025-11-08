@@ -41,5 +41,10 @@ void AGD_EnemyCharacter::BeginPlay()
 
 	GiveStartupAbilities();
 	InitializeAttributes();
+
+	UGD_AttributeSet* GD_AttributeSet = Cast<UGD_AttributeSet>(GetAttributeSet());
+	if (!IsValid(GD_AttributeSet)) return;
+	
+	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GD_AttributeSet->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 }
 

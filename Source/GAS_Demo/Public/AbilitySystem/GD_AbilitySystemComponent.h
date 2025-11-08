@@ -16,6 +16,12 @@ public:
 	virtual void OnGiveAbility(FGameplayAbilitySpec& AbilitySpec) override;
 	virtual void OnRep_ActivateAbilities() override;
 
+	UFUNCTION(BlueprintCallable, Category = "Gas|Abilities")
+	void SetAbilityLevel(TSubclassOf<UGameplayAbility> AbilityClass, int32 Level);
+
+	UFUNCTION(BlueprintCallable, Category = "Gas|Abilities")
+	void AddToAbilityLevel(TSubclassOf<UGameplayAbility> AbilityClass, int32 Level = 1);
+
 private:
 	void HandleAutoActivateAbility(const FGameplayAbilitySpec& AbilitySpec);
 };

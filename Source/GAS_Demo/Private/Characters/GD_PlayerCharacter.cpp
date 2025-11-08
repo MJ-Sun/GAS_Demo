@@ -4,6 +4,7 @@
 #include "GAS_Demo/Public/Characters/GD_PlayerCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/GD_AttributeSet.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -67,6 +68,11 @@ void AGD_PlayerCharacter::PossessedBy(AController* NewController)
 	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
 	GiveStartupAbilities();
 	InitializeAttributes();
+
+	UGD_AttributeSet* GD_AttributeSet = Cast<UGD_AttributeSet>(GetAttributeSet());
+	if (!IsValid(GD_AttributeSet)) return;
+	
+	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GD_AttributeSet->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 }
 
 void AGD_PlayerCharacter::OnRep_PlayerState()
@@ -77,6 +83,11 @@ void AGD_PlayerCharacter::OnRep_PlayerState()
 
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
 	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
+
+	UGD_AttributeSet* GD_AttributeSet = Cast<UGD_AttributeSet>(GetAttributeSet());
+	if (!IsValid(GD_AttributeSet)) return;
+	
+	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GD_AttributeSet->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 }
 
 

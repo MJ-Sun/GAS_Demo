@@ -3,7 +3,7 @@
 
 #include "GAS_Demo/Public/Characters/GD_BaseCharacter.h"
 #include "AbilitySystemComponent.h"
-
+#include "Net/UnrealNetwork.h"
 
 AGD_BaseCharacter::AGD_BaseCharacter()
 {
@@ -11,6 +11,13 @@ AGD_BaseCharacter::AGD_BaseCharacter()
 
 	// Tick and refresh bone transforms whether rendered or not - for bone updates on a dedicated server
 	GetMesh()->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+}
+
+void AGD_BaseCharacter::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ThisClass, bAlive);
 }
 
 UAbilitySystemComponent* AGD_BaseCharacter::GetAbilitySystemComponent() const
@@ -38,3 +45,25 @@ void AGD_BaseCharacter::InitializeAttributes() const
 	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 }
 
+void AGD_BaseCharacter::OnHealthChanged(const FOnAttributeChangeData& AttributeChangeData)
+{
+	if (AttributeChangeData.NewValue <= 0.f)
+	{
+		HandleDeath();
+	}
+}
+
+void AGD_BaseCharacter::HandleDeath()
+{
+	bAlive = false;
+
+	if (IsValid(GEngine))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("%s has died!"), *GetName()));
+	}
+}
+
+void AGD_BaseCharacter::HandleRespawn()
+{
+	bAlive = true;
+}
