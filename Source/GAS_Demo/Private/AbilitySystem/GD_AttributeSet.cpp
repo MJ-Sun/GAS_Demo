@@ -1,8 +1,10 @@
 ﻿// MJSun
 
-
 #include "AbilitySystem/GD_AttributeSet.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "GameplayTags/GDTags.h"
 #include "Net/UnrealNetwork.h"
+#include "GameplayEffectExtension.h" 
 
 void UGD_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
@@ -19,6 +21,13 @@ void UGD_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 void UGD_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
+
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute() && GetHealth() <= 0.f)
+	{
+		FGameplayEventData Payload;
+		Payload.Instigator = Data.Target.GetAvatarActor();
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(Data.EffectSpec.GetEffectContext().GetInstigator(), GDTags::Events::KillScored, Payload);
+	}
 
 	if (!bAttributesInitialized)
 	{

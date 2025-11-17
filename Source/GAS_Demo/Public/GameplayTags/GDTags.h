@@ -15,6 +15,8 @@ namespace GDTags
 
 	namespace Events
 	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(KillScored);
+		
 		namespace Enemy
 		{
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReact);
