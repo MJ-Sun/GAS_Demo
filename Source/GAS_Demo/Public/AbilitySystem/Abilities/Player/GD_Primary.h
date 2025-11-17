@@ -25,12 +25,12 @@ private:
 
 	void DrawHitBoxOverlapDebugs(const TArray<FOverlapResult>& OverlapResults, const FVector& HitBoxLocation) const;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Crash|Abilities")
+	UPROPERTY(EditDefaultsOnly, Category = "Gas|Abilities")
 	float HitBoxRadius = 100.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Crash|Abilities")
+	UPROPERTY(EditDefaultsOnly, Category = "Gas|Abilities")
 	float HitBoxForwardOffset = 200.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Crash|Abilities")
+	UPROPERTY(EditDefaultsOnly, Category = "Gas|Abilities")
 	float HitBoxElevationOffset = 20.0f;
 };
