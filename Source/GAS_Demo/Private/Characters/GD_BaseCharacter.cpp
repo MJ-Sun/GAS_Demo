@@ -5,6 +5,11 @@
 #include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
+namespace GasTags
+{
+	const FName Player = FName("Player");
+}
+
 AGD_BaseCharacter::AGD_BaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;

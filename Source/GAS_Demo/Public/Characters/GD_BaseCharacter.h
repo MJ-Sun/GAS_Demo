@@ -7,6 +7,11 @@
 #include "AbilitySystemInterface.h"
 #include "GD_BaseCharacter.generated.h"
 
+namespace GasTags
+{
+	extern GAS_DEMO_API const FName Player;
+}
+
 struct FOnAttributeChangeData;
 class UGameplayAbility;
 class UGameplayEffect;

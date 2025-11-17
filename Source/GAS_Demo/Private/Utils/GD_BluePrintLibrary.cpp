@@ -3,6 +3,11 @@
 
 #include "Utils/GD_BluePrintLibrary.h"
 
+#include "Characters/GD_BaseCharacter.h"
+#include "Kismet/GameplayStatics.h"
+
+class AGD_BaseCharacter;
+
 EHitDirection UGD_BluePrintLibrary::GetHitDirection(const FVector& TargetForward, const FVector& ToInstigator)
 {
 	const float Dot = FVector::DotProduct(TargetForward, ToInstigator);
@@ -33,4 +38,32 @@ FName UGD_BluePrintLibrary::GetHitDirectionName(const EHitDirection& HitDirectio
 		case EHitDirection::Back: return FName("Back");
 		default: return FName("None");
 	}
+}
+
+FClosestActorWithTagResult UGD_BluePrintLibrary::FindClosestActorWithTag(const UObject* WorldContextObject, const FVector& Origin, const FName& Tag)
+{
+	TArray<AActor*> ActorWithTag;
+	UGameplayStatics::GetAllActorsWithTag(WorldContextObject->GetWorld(), Tag, ActorWithTag);
+
+	float ClosestDistance = TNumericLimits<float>::Max();
+	AActor* ClosestActor = nullptr;
+
+	for (AActor* Actor : ActorWithTag)
+	{
+		if (!IsValid(Actor)) continue;
+		AGD_BaseCharacter* BaseCharacter = Cast<AGD_BaseCharacter>(Actor);
+		if (!IsValid(BaseCharacter) || !BaseCharacter->IsAlive()) continue;
+
+		const float Distance = FVector::Dist(Origin, Actor->GetActorLocation());
+		if (Distance < ClosestDistance)
+		{
+			ClosestDistance = Distance;
+			ClosestActor = Actor;
+		}
+	}
+	FClosestActorWithTagResult Result;
+	Result.Actor = ClosestActor;
+	Result.Distance = ClosestDistance;
+
+	return Result;
 }
