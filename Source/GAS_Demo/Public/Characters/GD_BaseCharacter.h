@@ -40,6 +40,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Gas|Attributes")
 	void ResetAttributes();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void RotateToTarget(AActor* RotateTarget);
+	
 protected:
 	void GiveStartupAbilities();
 	void InitializeAttributes() const;

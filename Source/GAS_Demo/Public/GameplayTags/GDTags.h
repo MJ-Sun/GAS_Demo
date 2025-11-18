@@ -11,6 +11,11 @@ namespace GDTags
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Secondary);
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Tertiary);
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(ActivateOnGiven);
+
+		namespace Enemy
+		{
+			UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attack);
+		}
 	}
 
 	namespace Events
@@ -20,6 +25,7 @@ namespace GDTags
 		namespace Enemy
 		{
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReact);
+			UE_DECLARE_GAMEPLAY_TAG_EXTERN(EndAttack);
 		}
 	}
 }

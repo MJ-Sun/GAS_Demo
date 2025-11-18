@@ -3,9 +3,10 @@
 
 #include "Characters/GD_EnemyCharacter.h"
 
+#include "AIController.h"
 #include "AbilitySystem/GD_AbilitySystemComponent.h"
 #include "AbilitySystem/GD_AttributeSet.h"
-#include "Runtime/AIModule/Classes/AIController.h"
+#include "Components/TimelineComponent.h"
 
 
 AGD_EnemyCharacter::AGD_EnemyCharacter()
