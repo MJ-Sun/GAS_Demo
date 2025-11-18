@@ -5,6 +5,11 @@
 
 namespace GDTags
 {
+	namespace SetByCaller
+	{
+		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Projectile);
+	}
+	
 	namespace GDAbilities
 	{
 		UE_DECLARE_GAMEPLAY_TAG_EXTERN(Primary);

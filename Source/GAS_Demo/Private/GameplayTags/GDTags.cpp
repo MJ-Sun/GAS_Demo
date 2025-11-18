@@ -2,6 +2,11 @@
 
 namespace GDTags
 {
+	namespace SetByCaller
+	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Projectile, "GDTags.SetByCaller.Projectile", "Tag for Set by Caller Magnitude for Projectile")
+	}
+	
 	namespace GDAbilities
 	{
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Primary, "GDTags.GDAbilities.Primary", "Tag for the Primary Ability")
